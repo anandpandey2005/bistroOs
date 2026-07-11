@@ -1,31 +1,26 @@
 import { Request, Response } from "express";
 import { User } from "../../models/User_Schema.models.js";
+import { ZodError } from "zod";
+import { RegisterUserInputSchema } from "../../schemas/user.schema.js";
 
 export async function user_signup(req: Request, res: Response): Promise<void> {
-    const userPayload = req?.body || {};
-
-    if (
-        Object.keys(userPayload).length === 0 ||
-        !userPayload.fullname?.trim() ||
-        !userPayload.email?.trim()
-    ) {
-        res.status(400).json({ success: false, message: "Bad request: fullname and email are required fields" });
-        return;
-    }
-
     try {
-        const emailLower = userPayload.email.toLowerCase();
-        const existingUser = await User.findOne({ email: emailLower });
+        const validatedData = RegisterUserInputSchema.parse(req.body);
 
+        const existingUser = await User.findOne({ email: validatedData.email });
         if (existingUser) {
-            res.status(409).json({ success: false, message: "A user account with this email already exists" });
+            res.status(409).json({
+                success: false,
+                message: "A user account with this email already exists"
+            });
             return;
         }
 
         const user_data = new User({
-            fullname: userPayload.fullname.trim(),
-            email: emailLower,
-            address: userPayload.address,
+            fullname: validatedData.fullname,
+            email: validatedData.email,
+            phone: validatedData.phone,
+            address: validatedData.address,
         });
 
         await user_data.save();
@@ -37,6 +32,16 @@ export async function user_signup(req: Request, res: Response): Promise<void> {
         });
 
     } catch (error: unknown) {
+
+        if (error instanceof ZodError) {
+            res.status(400).json({
+                success: false,
+                message: "Validation failed",
+                errors: error.format()
+            });
+            return;
+        }
+
         if (error instanceof Error) {
             res.status(500).json({
                 success: false,
@@ -49,6 +54,5 @@ export async function user_signup(req: Request, res: Response): Promise<void> {
             success: false,
             message: "An unexpected system error occurred."
         });
-        return;
     }
 }
