@@ -1,2 +1,2 @@
 # Title : BistroOs
-## logo : Elevating Towards the DIgitalize
+## slogon : Elevating Towards the DIgitalize
