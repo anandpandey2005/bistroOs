@@ -28,8 +28,6 @@ app.use('/signup', signup_router);
 //   res.status(404).json({ message: "Endpoint Resource Not Found" });
 // });
 
-
-
 let timestamp: string = new Date().toLocaleString('en-in');
 app.get('/', (req: Request, res: Response) => {
   res.json({
