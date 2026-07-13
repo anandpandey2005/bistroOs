@@ -2,6 +2,7 @@ import express, { Application, Response, Request } from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import signup_router from './routes/user_signup.routes.js';
+import address_router from './routes/adrress.routes.js';
 const app: Application = express();
 
 // middelware
@@ -23,6 +24,7 @@ app.use(
 );
 
 app.use('/signup', signup_router);
+app.use('/address', address_router);
 
 // app.use("/*", (req: Request, res: Response) => {
 //   res.status(404).json({ message: "Endpoint Resource Not Found" });

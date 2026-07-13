@@ -5,12 +5,10 @@ export async function logout_from_all_device(req: Request, res: Response): Promi
   try {
     const user_id = req?.user?._id;
     if (!user_id) {
-      res
-        .status(401)
-        .json({
-          success: false,
-          message: 'validation failed , plese clear all your cache and then retry',
-        });
+      res.status(401).json({
+        success: false,
+        message: 'id missing',
+      });
       return;
     }
 

@@ -6,12 +6,10 @@ export async function logout_from_specific_device(req: Request, res: Response): 
     const user_id = req?.user?._id || {};
     const role = req?.user?.role || {};
     if (!user_id || !target_session_id || !role) {
-      res
-        .status(401)
-        .json({
-          success: false,
-          message: 'validation failed , plese clear all your cache and then retry',
-        });
+      res.status(401).json({
+        success: false,
+        message: 'id missing.',
+      });
       return;
     }
 
