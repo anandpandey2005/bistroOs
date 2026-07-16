@@ -2,7 +2,7 @@ import { Document, Types } from 'mongoose';
 
 export interface IAddress {
   _id?: Types.ObjectId;
-  tag: 'Home' | 'Work' | 'Other';
+  tag: string;
   line1: string;
   line2?: string | null;
   landmark: string;

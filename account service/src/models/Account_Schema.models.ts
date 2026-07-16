@@ -8,7 +8,7 @@ import {
 
 const AddressSchema = new Schema<IAddress>(
   {
-    tag: { type: String, enum: ['Home', 'Work', 'Other'], default: 'Home' },
+    tag: { type: String, default: 'home', trim: true, lowercase: true },
     line1: { type: String, trim: true, required: true },
     line2: { type: String, default: null },
     landmark: { type: String, trim: true, required: true },

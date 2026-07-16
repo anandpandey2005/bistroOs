@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const AddressInputSchema = z.object({
-  tag: z.enum(['Home', 'Work', 'Other']).default('Home'),
+  tag: { type: String, enum: ['Home', 'Work', 'Other'], default: 'Home' },
   line1: z.string().trim().min(1, 'Line 1 is required'),
   line2: z.string().nullable().default(null),
   landmark: z.string().trim().min(1, 'Landmark is required'),
