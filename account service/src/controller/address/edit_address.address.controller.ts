@@ -18,7 +18,7 @@ const input_validation = z.object({
 
 export async function update_address(req: Request, res: Response): Promise<void> {
     try {
-        const validate_data = input_validation.parse(req.body);
+        const validate_data = input_validation.parse(req?.body);
         const { address_id, ...rest } = validate_data;
         const user_id = req.user?._id;
 
