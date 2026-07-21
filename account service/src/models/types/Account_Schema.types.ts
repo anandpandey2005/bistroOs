@@ -46,7 +46,7 @@ export interface IAccount {
   savedAddress?: IAddress[];
   device?: IDevice[];
   recentlyViewed?: IRecentlyViewed[];
-  archived?: boolean;
+  deactivated?: boolean;
   blocked?: boolean;
   createdAt?: Date;
   updatedAt?: Date;

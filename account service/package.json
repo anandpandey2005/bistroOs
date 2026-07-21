@@ -1,7 +1,7 @@
 {
   "name": "api-gateway",
   "version": "1.0.0",
-  "description": "this redirect the route to the other services (proxy server)",
+  "description": "handle alll the thingsrelated to the account",
   "license": "ISC",
   "author": "",
   "type": "module",

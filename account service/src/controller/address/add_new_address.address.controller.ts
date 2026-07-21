@@ -7,8 +7,8 @@ export async function add_new_address(req: Request, res: Response): Promise<void
   try {
     const validatedData = AddressInputSchema.parse(req?.body);
     console.log(validatedData);
-    const user_id = req?.user?._id || req.headers.authorization?.split(' ')[1];
-    // const user_id = req?.user?._id || {};
+    // const user_id = req?.user?._id || req.headers.authorization?.split(' ')[1];
+    const user_id = req?.user?._id || {};
     if (!user_id) {
       res.status(400).json({ success: false, message: 'id missing' });
       return;

@@ -109,7 +109,7 @@ const Account_Schema = new Schema<IAccountDocument>(
       default: null,
     },
     savedAddress: [AddressSchema],
-    archived: {
+    deactivated: {
       type: Boolean,
       default: false,
     },
