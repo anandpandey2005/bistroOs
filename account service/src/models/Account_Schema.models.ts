@@ -52,7 +52,7 @@ const recently_Viewed_Schema = new Schema<IRecentlyViewed>(
     name: {
       type: String,
       trim: true,
-      derfault: '',
+      default: '',
     },
   },
   { timestamps: true },
