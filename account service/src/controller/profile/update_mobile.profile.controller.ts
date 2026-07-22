@@ -2,8 +2,9 @@ import { z } from "zod";
 import { Account } from "../../models/Account_Schema.models.js";
 import { Request, Response } from "express";
 
-const email_validation = z.object({
-    email: z.string().trim().toLowerCase().email("Please provide a valid email address"),
+const mobile_validation = z.object({
+    counytry_code: z.string().trim().toLowerCase().length(3, "Please provide a valid country code."),
+    number: z.string().trim().toLowerCase().length(10, "Please provide a valid phone number"),
     otp: z.string().trim().length(6, "Invalid otp.")
 });
 
@@ -15,7 +16,7 @@ export async function update_mobile(req: Request, res: Response): Promise<void> 
             res.status(400).json({ success: false, message: "ID missing." });
             return;
         }
-        const validate_data = email_validation.parse(req?.body);
+        const validate_data = mobile_validation.parse(req?.body);
 
         const updatedUser = await Account.findOneAndUpdate(
             {
@@ -24,7 +25,7 @@ export async function update_mobile(req: Request, res: Response): Promise<void> 
                 otpExpiry: { $gt: new Date() }
             },
             {
-                $set: { email: validate_data.email },
+                $set: { "phone.number": validate_data.number, "phone.countryCode": validate_data.counytry_code },
                 $unset: { otp: "", otpExpiry: "" }
             },
             { new: true }
@@ -37,7 +38,7 @@ export async function update_mobile(req: Request, res: Response): Promise<void> 
 
         res.status(200).json({
             success: true,
-            message: "Email updated successfully."
+            message: "phone number updated successfully."
         });
 
         return;

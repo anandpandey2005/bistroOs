@@ -38,7 +38,7 @@ export interface IAccount {
   fullname: string;
   email: string;
   phone?: {
-    country_code: '+91';
+    countryCode: '+91';
     number: string | null;
   };
   otp: string;

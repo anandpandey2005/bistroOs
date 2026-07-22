@@ -83,7 +83,7 @@ const Account_Schema = new Schema<IAccountDocument>(
       ],
     },
     phone: {
-      country_code: {
+      countryCode: {
         type: String,
         enum: ['+91'],
         default: '+91',
